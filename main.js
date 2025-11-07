@@ -46,3 +46,13 @@ Promise.all([jsonData])
     console.log('loaded', anscombe); // verify JSON loaded
     barChart(anscombe.set1, "x", "crimson");
   })
+
+  // Populate dropdown with states from external JSON
+  d3.json("states.json").then(function(states) {
+    d3.select("#state-select")
+      .selectAll("option")
+      .data(states)
+      .enter()
+      .append("option")
+      .text(function(d) {return d; });
+  })

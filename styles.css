@@ -11,6 +11,7 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 header, div, footer {
@@ -35,6 +36,19 @@ header {
     align-items: center;     /* center vertically */
     height: 400px;           /* match SVG height or desired height */
     /* transform: translateX(+10%); */
+}
+
+.question_box {
+    width:600px;
+    height:auto;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    text-align: center;
+    border-radius: 15px;
+    background-color: wheat;
 }
 
 button {

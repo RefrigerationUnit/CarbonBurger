@@ -5,13 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="d3.js"></script>
 </head>
 <body>
     <header>Home - About - References</header>
     <div id="chart"></div>
-    <div>Slider goes here</div>
-    <button id="btn">Press me</button>
+    <div class="question_box">
+        <p>How often do you eat red meat?</p>
+        <button>every day</button>
+        <button>few times a week</button>
+        <button>rarely/never</button>
+    </div>
+    <div class="question_box">
+        <p>What is your main medium of transportation?</p>
+        <button>Car</button>
+        <button>Bike</button>
+        <button>Public Transport</button>
+        <button>Walking</button>
+    </div>
+    <div class="question_box">
+        <p>Which state do you live in?</p>
+        <select id="state-select"></select>
+    </div>
+    <div>SLIDER</div>
     <div class="footer_wrapper">
         <hr>
         <footer>•This website was created by Julio, Ayomikun, and Elizabeth for our Data Visualization class at Columbia University!</footer>
