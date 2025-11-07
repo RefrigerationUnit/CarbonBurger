@@ -37,6 +37,14 @@ header {
     /* transform: translateX(+10%); */
 }
 
+button {
+    padding: 8px 16px;
+    margin: 16px;
+    font-size: 16px;
+    cursor: progress;
+}
+
+
 
 .footer_wrapper {
     margin-top: auto;
