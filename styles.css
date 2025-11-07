@@ -29,6 +29,15 @@ header {
     background-color: antiquewhite;
 }
 
+#chart {
+    display: flex;
+    justify-content: center; /* center horizontally */
+    align-items: center;     /* center vertically */
+    height: 400px;           /* match SVG height or desired height */
+    /* transform: translateX(+10%); */
+}
+
+
 .footer_wrapper {
     margin-top: auto;
     text-align: center;
