@@ -23,11 +23,29 @@ header {
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    padding: 16px;
+    padding: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     text-align: center;
     width: 100%;
     background-color: antiquewhite;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: center;   /* center elements */
+    gap: 1.5rem;               /* flexible gap between elements */
+    flex-wrap: nowrap;         /* keep on one line */
+    padding: 10px;
+}
+
+@media (min-width: 600px) {
+  .buttons-container {
+    justify-content: space-between; /* spread out fully */
+    max-width: calc(250px * (3 - 1) + 100px * 3);
+    margin: 0 auto;                  /* center the container */
+    gap: initial;                   /* remove gap, spacing by space-between */
+    width: 100%;                   /* full width to use space-between */
+  }
 }
 
 #chart {
@@ -36,26 +54,32 @@ header {
     align-items: center;     /* center vertically */
     height: 400px;           /* match SVG height or desired height */
     /* transform: translateX(+10%); */
+    margin-bottom: 100px;
 }
 
 .question_box {
     width:600px;
     height:auto;
-    margin: 10px;
+    margin: 10px auto;
+    margin-bottom: 500px;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 2px solid black;
     border-radius: 8px;
-    background-color: #f9f9f9;
     text-align: center;
     border-radius: 15px;
     background-color: wheat;
 }
 
-button {
+.btn1 {
     padding: 8px 16px;
     margin: 16px;
     font-size: 16px;
     cursor: progress;
+}
+
+.btn0 {
+    border: none;
+    background: none;
 }
 
 
