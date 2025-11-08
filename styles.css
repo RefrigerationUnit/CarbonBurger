@@ -52,7 +52,7 @@ header {
     display: flex;
     justify-content: center; /* center horizontally */
     align-items: center;     /* center vertically */
-    height: 400px;           /* match SVG height or desired height */
+    height: auto;           /* match SVG height or desired height */
     /* transform: translateX(+10%); */
     margin-bottom: 100px;
 }
