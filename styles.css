@@ -84,7 +84,7 @@ header {
 }
 
 .btn0:hover {
-    text-decoration: underline;
+    text-decoration: bold;
     color: blue;
 }
 
