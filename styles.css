@@ -1,107 +1,186 @@
+/* --- brutalist base and variables (add to top) --- */
+:root {
+  --bg: #fdfdfd;
+  --ink: #111;
+  --accent: #ff3b30;   /* loud red */
+  --accent-2: #0f7cff; /* electric blue */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* keep html,body height rule from your file */
 html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
+  height: 100%;
 }
 
+/* --- body --- */
 body {
-    padding-top: 56px;
-    background-color: antiquewhite;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  padding-top: 64px; /* slight bump to clear thicker header */
+  background: var(--bg);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-header, div, footer {
-    padding: 16px;
-}
-
+/* --- header as a top utility bar --- */
 header {
-    position: fixed;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    width: 100%;
-    background-color: antiquewhite;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  background: #fff;
+  border-bottom: 3px solid var(--ink);
+  box-shadow: none;         /* flat */
+  padding: 14px 16px;
+  text-align: center;
 }
 
+/* nav container layout stays responsive */
 .buttons-container {
-    display: flex;
-    justify-content: center;   /* center elements */
-    gap: 1.5rem;               /* flexible gap between elements */
-    flex-wrap: nowrap;         /* keep on one line */
-    padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
 @media (min-width: 600px) {
   .buttons-container {
-    justify-content: space-between; /* spread out fully */
-    max-width: calc(250px * (3 - 1) + 100px * 3);
-    margin: 0 auto;                  /* center the container */
-    gap: initial;                   /* remove gap, spacing by space-between */
-    width: 100%;                   /* full width to use space-between */
+    justify-content: space-between;
+    max-width: 900px;
+    margin: 0 auto;
+    gap: 0;
+    width: 100%;
   }
 }
 
-#chart {
-    display: flex;
-    justify-content: center; /* center horizontally */
-    align-items: center;     /* center vertically */
-    height: auto;           /* match SVG height or desired height */
-    /* transform: translateX(+10%); */
-    margin-bottom: 100px;
-}
-
-.question_box {
-    width:600px;
-    height:auto;
-    margin: 10px auto;
-    margin-bottom: 500px;
-    padding: 10px;
-    border: 2px solid black;
-    border-radius: 8px;
-    text-align: center;
-    border-radius: 15px;
-    background-color: wheat;
-}
-
-.btn1 {
-    padding: 8px 16px;
-    margin: 16px;
-    font-size: 16px;
-    cursor: progress;
-}
-
+/* --- nav buttons styled like modules --- */
 .btn0 {
-    border: none;
-    background: none;
-    cursor: pointer;
+  background: #fff;
+  border: 2px solid var(--ink);
+  padding: 6px 14px;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: transform 0.05s ease;
 }
 
 .btn0:hover {
-    text-decoration: bold;
-    color: blue;
+  transform: translateY(-1px);
 }
 
+.btn0.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: #000;
+}
+
+/* --- chart panel --- */
+#chart {
+  width: min(1100px, 100%);
+  padding: 16px;
+  margin: 20px auto 40px;
+  background: repeating-linear-gradient(
+    90deg,
+    #fdfdfd 0,
+    #fdfdfd 1px,
+    #f5f5f5 1px,
+    #f5f5f5 140px
+  );
+  border: 3px solid var(--ink);
+  box-shadow: 4px 4px 0 #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* --- question cards --- */
+.question_box {
+  width: min(760px, 94%);
+  margin: 18px auto;
+  padding: 14px;
+  background: #fff;
+  border: 3px solid var(--ink);
+  border-radius: 0;          /* square corners */
+  box-shadow: 4px 4px 0 #000;
+  text-align: left;
+}
+
+.question_box p {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+/* --- answer buttons --- */
+.btn1 {
+  background: #fff;
+  border: 2px solid var(--ink);
+  padding: 6px 12px;
+  margin: 8px 8px 0 0;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  cursor: pointer;                  /* was progress */
+  box-shadow: 2px 2px 0 #000;
+  transition: transform 0.05s ease, box-shadow 0.1s ease, background-color 0.1s ease, color 0.1s ease;
+}
+
+.btn1:hover {
+  transform: translateY(-1px);
+}
+
+.btn1:active {
+  background: var(--accent-2);
+  color: #fff;
+  border-color: #000;
+}
+
+/* --- select styled like a control --- */
+select#state-select {
+  appearance: none;
+  background: #fff;
+  border: 2px solid var(--ink);
+  padding: 6px 28px 6px 10px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  box-shadow: 2px 2px 0 #000;
+}
+
+/* --- footer --- */
 .footer_wrapper {
-    margin-top: auto;
-    text-align: center;
-    font-size: small;
-    color: gray;
+  margin-top: auto;
+  width: 100%;
+  text-align: center;
+  font-size: 0.7rem;
+  color: #555;
 }
 
 hr {
-    border: none;
-    border-top: 1px solid #ccc;
-    margin: 0;
+  border: none;
+  border-top: 2px solid var(--ink);
+  margin: 0;
 }
 
 footer {
-    margin-top: auto;
-    text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 8px 0;
+}
+
+/* Optional utility to force an accent look on any button/link */
+.accent {
+  background: var(--accent);
+  color: #fff !important;
+  border-color: #000 !important;
 }
