@@ -77,6 +77,12 @@ header {
   transform: translateY(-1px);
 }
 
+.btn0:active {
+  background: var(--accent-2);
+  color: #fff;
+  border-color: #000;
+}
+
 .btn0.active {
   background: var(--accent);
   color: #fff;
