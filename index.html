@@ -33,11 +33,34 @@
         <p>Which state do you live in?</p>
         <select id="state-select"></select>
     </div>
-    <div>SLIDER</div>
+    <!-- Replace SLIDER placeholder with slider HTML -->
+    <div class="question_box">
+        <p>Adjust the slider for visualization:</p>
+        <div class="sliderBlock" id="left"></div>
+        <div class="sliderBlock" id="slider"><input type="range" id="myRange" min="0" max="100" value="50"></div>
+        <div class="sliderBlock" id="right"></div>
+    </div>
     <div class="footer_wrapper">
         <hr>
         <footer>•This website was created by Julio, Ayomikun, and Elizabeth for our Data Visualization class at Columbia University!</footer>
     </div>
     <script src="main.js"></script>
+    <!-- Add slider script -->
+    <script>
+        // Slider functionality (adapted from slider_svg.html)
+        const slider = document.getElementById("myRange");
+        var colorScale = d3.scaleLinear().domain([0,100]).range(["red","green"]);
+
+        var leftSide = d3.select("#left").append("svg").attr("width",100).attr("height",100);
+        var rightSide = d3.select("#right").append("svg").attr("width",100).attr("height",100);
+
+        leftSide.append("circle").attr("id","leftRect").attr("r",50/5).attr("cx",50).attr("cy",50);
+        rightSide.append("circle").attr("id","rightRect").attr("r",50/5).attr("cx",50).attr("cy",50);
+        
+        slider.oninput = function() {
+             d3.select("#leftRect").attr("r",this.value/5).attr("fill",colorScale(this.value));
+             d3.select("#rightRect").attr("r",(100-this.value)/5).attr("fill",colorScale(100-this.value));
+        };
+    </script>
 </body>
 </html>
