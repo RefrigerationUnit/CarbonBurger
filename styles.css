@@ -29,6 +29,44 @@ body {
   align-items: center;
 }
 
+
+/* --- image gallery --- */
+.image-gallery1 {
+  position: absolute;
+  left: 1px;
+  top: 80%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  
+  z-index: -1;
+
+}
+
+.image-gallery2 {
+  position: absolute;
+  right: 1px;
+  top: 80%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  
+  z-index: -1;
+
+}
+
+.side-image {
+  height: 300px;
+  width: auto;
+}
+
+
 /* --- header as a top utility bar --- */
 header {
   position: fixed;
@@ -182,6 +220,7 @@ footer {
   letter-spacing: 0.05em;
   padding: 8px 0;
 }
+
 
 /* Optional utility to force an accent look on any button/link */
 .accent {
