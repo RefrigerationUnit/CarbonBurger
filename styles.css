@@ -61,6 +61,7 @@ body {
 
 }
 
+
 .side-image {
   height: 300px;
   width: auto;
@@ -227,4 +228,8 @@ footer {
   background: var(--accent);
   color: #fff !important;
   border-color: #000 !important;
+}
+.world {
+  height: 500px;
+  width: auto;
 }
