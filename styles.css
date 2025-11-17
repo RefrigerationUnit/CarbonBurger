@@ -158,6 +158,10 @@ select#state-select {
   box-shadow: 2px 2px 0 #000;
 }
 
+img {
+  height: 300px;
+  width: auto;
+}
 /* --- footer --- */
 .footer_wrapper {
   margin-top: auto;
