@@ -33,14 +33,14 @@ body {
 /* --- image gallery --- */
 .image-gallery1 {
   position: absolute;
-  left: 1px;
-  top: 80%;
+  left: 0;
+  top: 100%;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
-  gap: 10px;
+  gap: 100px;
   
   transform: translateX(-30%);
 
@@ -57,7 +57,7 @@ body {
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
-  gap: 150px;
+  gap: 200px;
 
   transform: translateX(30%);
   
@@ -136,7 +136,7 @@ header {
 #chart {
   width: min(1100px, 100%);
   padding: 16px;
-  margin: 20px auto 40px;
+  margin: 20px auto 0;
   background: repeating-linear-gradient(
   );
   border: none;  /* remove border */
@@ -149,7 +149,7 @@ header {
 /* --- question cards --- */
 .question_box {
   width: min(500px, 94%);
-  margin: 18px auto;
+  margin: 70px auto;
   padding: 14px;
   background: #fff;
   border: 3px solid var(--ink);
