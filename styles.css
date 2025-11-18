@@ -42,20 +42,24 @@ body {
   flex-direction: column;
   gap: 10px;
   
+  transform: translateX(-30%);
+
   z-index: -1;
 
 }
 
 .image-gallery2 {
   position: absolute;
-  right: 1px;
+  right: 0;
   top: 80%;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
-  gap: 10px;
+  gap: 150px;
+
+  transform: translateX(30%);
   
   z-index: -1;
 
@@ -63,7 +67,7 @@ body {
 
 
 .side-image {
-  height: 300px;
+  height: 250px;
   width: auto;
 }
 
@@ -144,7 +148,7 @@ header {
 
 /* --- question cards --- */
 .question_box {
-  width: min(760px, 94%);
+  width: min(500px, 94%);
   margin: 18px auto;
   padding: 14px;
   background: #fff;
