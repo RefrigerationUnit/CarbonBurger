@@ -1,9 +1,8 @@
-/* --- brutalist base and variables (add to top) --- */
 :root {
   --bg: #fdfdfd;
   --ink: #111;
-  --accent: #ff3b30;   /* loud red */
-  --accent-2: #0f7cff; /* electric blue */
+  --accent: #ff3b30;
+  --accent-2: #0f7cff;
 }
 
 * {
@@ -12,14 +11,383 @@
   padding: 0;
 }
 
-/* keep html,body height rule from your file */
 html, body {
   height: 100%;
 }
 
-/* --- body --- */
 body {
-  padding-top: 64px; /* slight bump to clear thicker header */
+  background: var(--bg);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 4rem;
+  padding-top: 64px;
+  min-height: 100vh;
+  align-items: center;
+  text-align: center;
+}
+
+h3 { 
+  background: var(--bg);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 4rem;
+  padding-top: 64px;
+  min-height: 20vh;
+  align-items: center;
+  text-align: center;
+  border: 5px solid var(--ink);
+}
+
+h2 { 
+  margin-top: 700px;
+}
+
+
+#sticky {
+  position: sticky;
+  top: 0;
+  height: 40vh;
+
+  display:inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 10; /* stays above background images */
+}
+
+container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.panel {
+  min-height: 60vh;
+  padding: 4rem 2rem;     
+  justify-content: center; 
+}
+
+.auto-panel {
+  height: auto !important;
+  min-height: 80vh;
+  padding-top: 50rem;  
+  padding-bottom: 0rem;
+}
+
+
+header {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  background: #fff;
+  border-bottom: 3px solid var(--ink);
+  padding: 14px 16px;
+  z-index: 20;
+}
+
+.buttons-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+}
+
+
+.btn0 {  
+  background: #fff;
+  border: 2px solid var(--ink);
+  padding: 6px 14px;
+  text-transform: uppercase;
+  font-size: 2rem; /* controls header font size */
+  letter-spacing: 0.03em;
+  cursor: pointer;
+}
+
+
+/*style for the first chart*/
+#chart {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1000px ;
+}
+
+/* style for second chart + side-by-side context box */
+.chart-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    margin-top: 400px ;
+}
+
+/* context box aesthetics */
+.context-box {
+    width: 260px;                  
+    padding: 16px 20px;
+    background: #fff;
+    border: 3px solid var(--ink);
+    box-shadow: 4px 4px 0 #000;
+    font-size: 1.5rem;
+    line-height: 1.4;
+    word-wrap: break-word;      
+    hyphens: auto;                
+}
+
+.fade-target {
+    opacity: 0;
+    transform: translateX(60px);   /* slide from right */
+    transition: 
+        opacity 2s ease, 
+        transform 2s ease;
+}
+
+.fade-in {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+
+/* image styles */
+.image-panel1 {
+  position: static ;
+  left: 0;
+  top: 50%;
+  transform: translateY(-170%) translateX(-40%);
+  display: block;
+  gap: 10px;
+}
+
+.panel1-image {
+  height: 700px;
+  width: auto;
+}
+
+.image2-panel1 {
+  position: static ;
+  left: 0;
+  top: 50%;
+  transform: translateY(-100%) translateX(45%);
+  display: block;
+  gap: 10px;
+}
+.panel1-image2 {
+  height: 400px;
+  width: auto;
+}
+
+.image-gallery1 {
+  position: fixed;
+  right: 0;
+  top: 70%;
+  transform: translateY(-50%) translateX(30%);
+  display: flex;
+  flex-direction: column;
+  gap: 150px;
+  z-index: -1;
+}
+.image-gallery2 {
+  position: fixed;
+  right: 0;
+  top: 70%;
+  transform: translateY(-50%) translateX(30%);
+  display: flex;
+  flex-direction: column;
+  gap: 150px;
+  z-index: -1;
+}
+
+.image-panel2 {
+  position:static;
+  top: 50%;
+  transform: translateY(20%) translateX(-30%);
+  display:block;
+  flex-direction: column;
+  gap: 0px;
+  z-index: -1;
+}
+
+
+/* taylor swift comparison*/
+
+.swift-comparison-panel {
+    min-height: 100vh;
+    padding-top: 200px;
+    padding-bottom: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Italic caption */
+.swift-caption {
+    width: 100%;
+    text-align: center;
+    font-size: 4rem;
+    margin-bottom: 20px;   /* space between caption and main layout */
+}
+
+/* Left side: Taylor Swift block */
+.swift-comparison-panel .swift-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 85%;
+  margin-right: 200px;
+
+}
+
+/* Taylor Swift image size only inside comparison section */
+.swift-comparison-panel .panel2-image {
+  height: 2000px;  /* adjust as needed */
+  width: auto;
+  margin-right: 900px;
+}
+
+/* Right side grid */
+.swift-comparison-panel .comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 150px;     
+  padding: 0;
+  margin-top: -1700px;
+  margin-right:-2500px;
+}
+
+/* Shared column styling */
+.swift-comparison-panel .col {
+  display: flex;
+  flex-direction: column;
+}
+
+/* LEFT column items */
+.swift-comparison-panel .left-col .item {
+  display: flex;
+  flex-direction: row-reverse;   /* text | image */
+  text-align: left;
+  margin-right: 200px;
+}
+
+/* RIGHT column: text appears RIGHT of image */
+.swift-comparison-panel .right-col .item {
+  display: flex;
+  flex-direction: row;           /* image | text */
+  text-align: left;
+}
+
+
+/* Ensure consistent icon + text sizing */
+.swift-comparison-panel .item img {
+  height: 300px; 
+  width: auto;
+  padding: 20px
+}
+
+.swift-comparison-panel .item p {
+  font-size: 2.6rem;
+  max-width: 240px;
+  line-height: 1.25;
+  margin-bottom: 250px;
+  margin-top: 100px;
+  margin-left: 200px;
+}
+
+/* lifestyle question styles */
+.small-panel {
+  height: auto;
+  padding: 10px 0;
+  margin-top: auto;
+}
+
+.question_box {
+  width: min(2500px, 94%);
+  height: min(450px);
+  margin: 12px auto;
+  padding: 14px;
+  background: #fff;
+  border: 3px solid var(--ink);
+  box-shadow: 4px 4px 0 #000;
+  text-align:center;
+  margin-top: 500px; 
+  margin-bottom: 0px;
+}
+
+.question_box p {
+  font-size: 5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 30px;
+  margin-top: 20px;
+}
+
+.question_box_slider {
+  width: min(2000px, 94%);
+  height: min(800px);
+  margin: 12px auto;
+  padding: 14px;
+  background: #fff;
+  border: 3px solid var(--ink);
+  box-shadow: 4px 4px 0 #000;
+  text-align:center;
+  margin-top: 200px; 
+}
+
+.btn1 {
+  background: #fff;
+  border: 2px solid var(--ink);
+  padding: 6px 12px;
+  margin: 8px 8px 0 0;
+  font-size: 2rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 #000;
+}
+
+.btn1.selected {
+  background: var(--accent-2);
+  color: #fff;
+}
+
+select#state-select {
+  appearance: none;
+  background: #fff;
+  border: 2px solid var(--ink);
+  padding: 6px 28px 6px 10px;
+  font-size: 2rem;
+  text-transform: uppercase;
+  margin-top: 80px;
+}
+
+
+/* OLD VER that was refined to create code above */
+/* --- brutalist base and variables (add to top) --- */
+/*
+:root {
+  --bg: #fdfdfd;
+  --ink: #111;
+  --accent: #ff3b30;   /* loud red 
+  --accent-2: #0f7cff; /* electric blue 
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* keep html,body height rule from your file 
+html, body {
+  height: 100%;
+}
+
+/* --- body --- 
+body {
+  padding-top: 64px; /* slight bump to clear thicker header 
   background: var(--bg);
   color: var(--ink);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -30,17 +398,17 @@ body {
 }
 
 
-/* --- image gallery --- */
+/* --- image gallery --- 
 .image-gallery1 {
   position: absolute;
-  left: 0;
-  top: 100%;
+  left: 1px;
+  top: 80%;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
-  gap: 100px;
+  gap: 10px;
   
   transform: translateX(-30%);
 
@@ -57,7 +425,7 @@ body {
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
-  gap: 200px;
+  gap: 150px;
 
   transform: translateX(30%);
   
@@ -72,7 +440,7 @@ body {
 }
 
 
-/* --- header as a top utility bar --- */
+/* --- header as a top utility bar --- 
 header {
   position: fixed;
   top: 0;
@@ -81,12 +449,12 @@ header {
   width: 100%;
   background: #fff;
   border-bottom: 3px solid var(--ink);
-  box-shadow: none;         /* flat */
+  box-shadow: none;         /* flat 
   padding: 14px 16px;
   text-align: center;
 }
 
-/* nav container layout stays responsive */
+/* nav container layout stays responsive 
 .buttons-container {
   display: flex;
   align-items: center;
@@ -104,7 +472,7 @@ header {
   }
 }
 
-/* --- nav buttons styled like modules --- */
+/* --- nav buttons styled like modules --- 
 .btn0 {
   background: #fff;
   border: 2px solid var(--ink);
@@ -132,30 +500,30 @@ header {
   border-color: #000;
 }
 
-/* --- chart panel --- */
+/* --- chart panel --- 
 #chart {
   width: min(1100px, 100%);
   padding: 16px;
-  margin: 20px auto 0;
+  margin: 20px auto 40px;
   background: repeating-linear-gradient(
   );
-  border: none;  /* remove border */
-  box-shadow: none;  /* remove shadow */
+  border: none;  /* remove border 
+  box-shadow: none;  /* remove shadow 
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* --- question cards --- */
+/* --- question cards --- 
 .question_box {
   width: min(500px, 94%);
-  margin: 70px auto;
+  margin: 18px auto;
   padding: 14px;
   background: #fff;
   border: 3px solid var(--ink);
-  border-radius: 0;          /* square corners */
+  border-radius: 0;          /* square corners 
   box-shadow: 4px 4px 0 #000;
-  text-align: center;
+  text-align: left;
 }
 
 .question_box p {
@@ -165,16 +533,16 @@ header {
   margin-bottom: 8px;
 }
 
-/* --- answer buttons --- */
+/* --- answer buttons --- 
 .btn1 {
   background: #fff;
   border: 2px solid var(--ink);
   padding: 6px 12px;
-  margin: 12px 8px 0 0;
+  margin: 8px 8px 0 0;
   font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.03em;
-  cursor: pointer;                  /* was progress */
+  cursor: pointer;                  /* was progress 
   box-shadow: 2px 2px 0 #000;
   transition: transform 0.05s ease, box-shadow 0.1s ease, background-color 0.1s ease, color 0.1s ease;
 }
@@ -189,12 +557,11 @@ header {
   border-color: #000;
 }
 
-/* --- select styled like a control --- */
+/* --- select styled like a control --- 
 select#state-select {
   appearance: none;
   background: #fff;
   border: 2px solid var(--ink);
-  margin-top: 12px;
   padding: 6px 28px 6px 10px;
   font-size: 0.75rem;
   text-transform: uppercase;
@@ -206,7 +573,9 @@ img {
   height: 300px;
   width: auto;
 }
-/* --- footer --- */
+*/
+
+/* --- footer --- 
 .footer_wrapper {
   margin-top: auto;
   width: 100%;
@@ -228,7 +597,7 @@ footer {
 }
 
 
-/* Optional utility to force an accent look on any button/link */
+/* Optional utility to force an accent look on any button/link 
 .accent {
   background: var(--accent);
   color: #fff !important;
@@ -238,3 +607,41 @@ footer {
   height: 500px;
   width: auto;
 }
+
+
+/*
+body {
+    margin: 0;
+    font-family: sans-serif;
+}
+
+#sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#chart {
+    width: 100%;
+    height: 100%;
+}
+
+#container {
+    width: 100%;
+}
+
+.panel {
+    height: 100vh;
+    padding: 3rem;
+    box-sizing: border-box;
+}
+
+.question_box {
+    margin-top: 20px;
+}
+*/
+
+
