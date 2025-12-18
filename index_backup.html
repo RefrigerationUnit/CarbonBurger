@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale= 1, shrink-to-fit=no">
+    <title>Carbon Visualizer</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="d3.js"></script>
+</head>
+<body>
+    <header>
+        <div class="buttons-container">
+            <button class="btn0" onclick="location.href='references/index.html'">References</button>
+            <button class="btn0" onclick="location.href='index.html'">Home</button>
+            <button class="btn0" onclick="location.href='about/index.html'">About Us</button>
+        </div>
+    </header>
+
+    <div id="sticky">
+    </div>
+
+    <div id="container" style="height: 100vh">
+        <div id="content">
+
+            <div class="hero-panel">
+                <h1>Not Your Average Carbon Footprint Quiz</h1>
+                <p class="hero-subtitle">Exposing Carbon Footprint Propaganda</p>
+                <div class="hero-chart-wrapper">
+                    <div id="chart"></div>
+                </div>
+                <div class="scroll-indicator">
+                    <p>↓ Scroll to begin ↓</p>
+                </div>
+            </div>
+
+            <div class="panel" >
+                <h3>Private jets have become one of the clearest symbols of modern inequality: 
+                    a tiny elite soaring above the world while the rest of us absorb the costs. 
+                    Each hour of private flight emits more carbon than many people produce in an 
+                    entire year. Yet these flights are increasing, often subsidized through 
+                    loopholes and tax breaks. What does it mean when luxury travel becomes a 
+                    collective burden?
+                </h3>
+            </div>
+<!--
+            <div class="panel" >
+                <i>Taylor Swift's 2023 jet emissions = 560 years of your life or 7 lifetimes</i>
+                <div class="image-panel2">
+                    <img src="0_images/TaylorSwift.png" alt="Friends Image" class="panel2-image" >
+                </div>
+
+                <div class="comparison-grid">
+
+                   
+                    <div class="col left-col">
+                        <h2>Avg American</h2>
+
+                        <div class="item">
+                            <p>Human life expectancy</p>
+                            <img src="0_images/stick_figure.png">
+                        </div>
+
+                        <div class="item">
+                            <p>Water footprint</p>
+                            <img src="0_images/puddle.png">
+                        </div>
+
+                        <div class="item">
+                            <p>Apartment plants</p>
+                            <img src="0_images/apartment_plants.png">
+                        </div>
+
+                        <div class="item">
+                            <p>Match flame</p>
+                            <img src="0_images/match.png">
+                        </div>
+                    </div>
+
+
+                    
+                    <div class="col right-col">
+                        <h2>Taylor Swift</h2>
+
+                        <div class="item">
+                            <img src="0_images/clam.png">
+                            <p>Quahog clam (500+ yrs)</p>
+                        </div>
+
+                        <div class="item">
+                            <img src="0_images/earth.png">
+                            <p>Equivalent planetary impact</p>
+                        </div>
+
+                        <div class="item">
+                            <img src="0_images/amazon.png">
+                            <p>Amazon rainforest</p>
+                        </div>
+
+                        <div class="item">
+                            <img src="0_images/bright_sun.png">
+                            <p>Equivalent solar energy</p>
+                        </div>
+                    </div>
+
+                </div> -->
+               <div class="panel swift-comparison-panel">
+                    <div class="swift-caption">
+                        <i>Taylor Swift's 2023 jet emissions = 560 years of your life or 7 lifetimes</i>
+                    </div>
+
+                    <!-- grid format-->
+                    <div class="swift-row">
+
+                        <!-- left side: Taylor Swift -->
+                        <div class="swift-left">
+                            <div class="image-panel2">
+                                <img src="0_images/celebrities/TaylorSwift.png" alt="Taylor Swift Jet" class="panel2-image">
+                            </div>
+                        </div>
+                    </div>
+                
+
+                    <!-- right side: COMPARISON GRID -->
+                    <div class="comparison-grid">
+
+                        <div class="col left-col">
+                            <h4>Avg American</h4>
+                            <div class="item ">
+                                <img src="0_images/stick_figure.png" alt="">
+                                <p>Human life<br>expectancy</p>
+                            </div>
+                            <div class="item">
+                                <img src="0_images/puddle.png" alt="">
+                                <p>Small puddle</p>
+                            </div>
+                            <div class="item">
+                                <img src="0_images/apartment_plants.png" alt="">
+                                <p>Aparment plants</p>
+                            </div>
+                            <div class="item">
+                                <img src="0_images/match.png" alt="">
+                                <p>A match<br>flame</p>
+                            </div>
+                        </div>
+
+                        <div class="col right-col">
+                            <h4>Taylor Swift</h4>
+                            <div class="item">
+                                <img src="0_images/clam.png" alt="">
+                                <p>Quahog clam<br>(500+ years)</p>
+                            </div>
+                            <div class="item">
+                                <img src="0_images/earth.png" alt="">
+                                <p>The Atlantic<br>Ocean</p>
+                            </div>
+                            <div class="item">
+                                <img src="0_images/amazon.png" alt="">
+                                <p>Amazon<br>rainforest</p>
+                            </div>
+                            <div class="item">
+                                <img src="0_images/bright_sun.png" alt="">
+                                <p>The sun</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            <!-- chart moved into hero section to appear below the title -->
+
+            <div class="panel" data-step="chart1">
+                <div class="chart-row">
+                    <div id="chart1"></div>
+
+                    <div class="context-box fade-target">
+                        <p>Your yearly CO₂ emissions (~13.8 metric tons) are extremely 
+                            small compared to private jet emissions, which often exceed 
+                            1,000 metric tons annually.
+                        </p>
+                    </div>
+                </div> 
+            </div>
+
+        <div class="panel auto-panel" >
+                <h3>Climate action has been framed as an individual responsibility: buy reusable bags, 
+                    eat less meat, take shorter showers. But when a single private jet flight emits as 
+                    much CO2 as the average person produces in a year, we're not all in the same boat (some of us are in yachts). 
+                    <blockquote> But how guilty should you REALLY feel?</blockquote>
+                    This project translates abstract tonnage into the everyday trade-offs ordinary people actually face, revealing 
+                    just how unequal the carbon economy really is. How guilty should you feel? 
+                    Now, let's calculate your actual footprint, then we'll show you what you'd have to give up to 
+                    emit as much as they do in a year.
+
+                </h3>
+        </div>
+
+
+            <div class="question-panel">
+                <div class="question_box" id="quiz-box">
+                    <p id="quiz-question"></p>
+
+                    <!-- where the answer buttons will go -->
+                    <div id="quiz-options"></div>
+
+                    <!-- state dropdown step (hidden until that step) -->
+                    <div id="quiz-state" style="display:none; margin-top: 0px;">
+                        <select id="state-select"></select>
+                    </div>
+
+                    <!-- Next button -->
+                    <div style="margin-top: 40px;">
+                        <button class="btn1" id="quiz-next-btn">Next</button>
+                    </div>
+
+                    <!-- Final results text (hidden until last step) -->
+                    <div id="quiz-results" style="display:none; margin-top: 40px;">
+                        Your total CO₂ emissions: 0 tons/year
+                    </div>
+                    <button class="btn1" id="quiz-restart-btn" style="display:none; margin-top: 20px;">
+                        Restart Quiz
+                    </button>
+                </div>
+            </div>
+
+            <div class="panel small-panel">
+                <div id="state-compare-chart"></div>
+            </div>
+
+<!-- hiding other images to use later
+            <div class="image-gallery1">
+                <img src="0_images/Friends.png" alt="Friends Image" class="side-image">
+                <img src="0_images/Kid.png" alt="Kid Image" class="side-image">
+                <img src="0_images/Shopping.png"alt="Shopping Image" class="side-image">
+            </div>
+
+            <div class="image-gallery2">
+                <img src="0_images/Bicycles.png" alt="Bicycles Image" class="side-image">
+                <img src="0_images/Cars.png" alt="Car Image" class="side-image">
+                <img src="0_images/Bus.png" alt="Bus Image" class="side-image">
+            </div> -->
+
+        <!--Slider and buttons in the same box --> 
+            <div class="panel">
+                <h2 >What would you sacrifice?</h2>
+                <div class="question_box_slider">
+                    <p>Adjust the slider for visualization:</p>
+                    <div class="sliderBlock" id="left"></div>
+                    <div class="sliderBlock" id="slider"><input type="range" id="myRange" min="0" max="100" value="50"></div>
+                    <div class="sliderBlock" id="right"></div>
+                    <p>Q1:</p>
+                    <button class="btn1 q1" value="40" id="q1_40">40</button>
+                    <button class="btn1 q1" value="60" id="q1_60">60</button>
+                    <button class="btn1 q1" value="80" id="q1_80">80</button>
+                    <p>Q2:</p>
+                    <button class="btn1 q2" value="40" id="q2_40">40</button>
+                    <button class="btn1 q2" value="60" id="q2_60">60</button>
+                    <button class="btn1 q2" value="80" id="q2_80">80</button>
+                    <p>Answer:</p>
+                    <div class="answer" id="answer"></div>
+                </div>
+            </div>
+            <div class="bottom-image">
+                <img src="0_images/World.png" alt="World image" class="world">
+            </div>
+            <div class="footer_wrapper">
+                <footer>•This website was created by Julio, Ayomikun, and Elizabeth for our Data Visualization class at Columbia University!</footer>
+            </div>
+
+        </div>
+        
+        <!-- Side Images -->
+        <div class="image-gallery-left">
+            <img src="0_images/Friends.png" alt="Friends Image" class="side-image">
+            <img src="0_images/Kid.png" alt="Kid Image" class="side-image">
+            <img src="0_images/Shopping.png" alt="Shopping Image" class="side-image">
+        </div>
+
+        <div class="image-gallery-right">
+            <img src="0_images/Bicycles.png" alt="Bicycles Image" class="side-image">
+            <img src="0_images/Cars.png" alt="Car Image" class="side-image">
+            <img src="0_images/Bus.png" alt="Bus Image" class="side-image">
+        </div>
+    </div>
+
+    <script src="d3.js"></script>
+    <script src="main.js"></script>     
+    <script src="transition.js"></script> 
+    <script src="slider.js"></script> 
+</body>
+</html>
