@@ -1,45 +1,41 @@
-// main.js - Carbon Footprint Quiz
-
 // ============ QUIZ DATA ============
 const quizQuestions = [
     {
         question: "HOW OFTEN DO YOU EAT RED MEAT?",
-        options: ["Daily", "Few times a week", "Rarely/Never"],
-        values: [2.5, 1.5, 0.5] // metric tons CO2/year
+        options: ["DAILY", "FEW TIMES A WEEK", "RARELY/NEVER"],
+        values: [2.5, 1.5, 0.5]
     },
     {
         question: "WHAT IS YOUR MAIN MEDIUM OF TRANSPORTATION?",
-        options: ["Car", "Bike", "Public Transportation", "Walking"],
+        options: ["CAR", "BIKE", "PUBLIC TRANSPORTATION", "WALKING"],
         values: [4.6, 0.1, 1.2, 0.05]
     },
     {
         question: "WHAT DOES YOUR CAFFEINE CONSUMPTION LOOK LIKE?",
-        options: ["Daily Starbucks", "Brew at home", "Energy drinks", "Don't drink"],
+        options: ["DAILY STARBUCKS", "BREW AT HOME", "ENERGY DRINKS", "DON'T DRINK"],
         values: [0.5, 0.15, 0.3, 0]
     },
     {
         question: "HOW OFTEN DO YOU TRAVEL BY AIRPLANE PER YEAR?",
-        options: ["0 flights", "1 to 2 flights", "3 to 5 flights", "6+ flights"],
+        options: ["0 FLIGHTS", "1 TO 2 FLIGHTS", "3 TO 5 FLIGHTS", "6+ FLIGHTS"],
         values: [0, 1.5, 4, 8]
     },
     {
         question: "WHAT ARE YOUR STREAMING HABITS?",
-        options: ["4+ daily hours", "Couple hours daily", "Weekends only", "Cable TV"],
+        options: ["4+ DAILY HOURS", "COUPLE HOURS DAILY", "WEEKENDS ONLY", "CABLE TV"],
         values: [0.4, 0.2, 0.08, 0.15]
     },
     {
         question: "HOW OFTEN DO YOU SHOP ONLINE?",
-        options: ["Multiple times a week", "Weekly", "Monthly", "Rarely"],
+        options: ["MULTIPLE TIMES A WEEK", "WEEKLY", "MONTHLY", "RARELY"],
         values: [1.2, 0.6, 0.2, 0.05]
     },
     {
         question: "WHICH STATE DO YOU LIVE IN?",
-        type: "dropdown",
-        options: [] // Will be populated with states
+        type: "dropdown"
     }
 ];
 
-// US States with CO2 multipliers (based on grid carbon intensity)
 const usStates = [
     "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut",
     "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa",
@@ -51,32 +47,31 @@ const usStates = [
     "Wisconsin", "Wyoming"
 ];
 
-// Celebrity data (6 celebrities)
+// Celebrity data (matching the 6 in the image)
 const celebrityData = {
-    "Jay Z": { co2: 4594, image: "JayZ.jpg", color: "#4a6fa5" },
+    "Jay Z": { co2: 4594, image: "JayZ.jpg", color: "#5a6fbf" },
     "Luke Bryan": { co2: 4007, image: "LukeBryan.jpg", color: "#e8a87c" },
-    "Taylor Swift": { co2: 8294, image: "TaylorSwift.png", color: "#85c88a" },
-    "Donald Trump": { co2: 32344, image: "DonaldTrump.jpg", color: "#9b72cf" },
-    "Kim Kardashian": { co2: 4800, image: "KimKardashian.jpg", color: "#f4a259" },
-    "P.Diddy": { co2: 6150, image: "PDiddy.jpg", color: "#bc6c8f" }
+    "Taylor Swift": { co2: 8294, image: "TaylorSwift.png", color: "#f4a259" },
+    "Donald Trump": { co2: 32344, image: "DonaldTrump.jpg", color: "#85c88a" },
+    "Kim Kardashian": { co2: 4800, image: "KimKardashian.jpg", color: "#9b72cf" },
+    "P.Diddy": { co2: 6150, image: "PDiddy.jpg", color: "#5a6fbf" }
 };
 
-// CO2 per item (in kg)
+// CO2 per item (kg)
 const co2PerItem = {
-    burgers: 6.61,        // kg CO2 per burger
-    water: 0.0003,        // kg CO2 per glass
-    nuggets: 0.15,        // kg CO2 per nugget
-    cigarettes: 0.014,    // kg CO2 per cigarette
-    uranium: 1e6          // kg CO2 equivalent per lb (nuclear is extremely energy dense)
+    burgers: 6.61,
+    water: 0.0003,
+    nuggets: 0.15,
+    cigarettes: 0.014,
+    uranium: 1e6
 };
 
 // ============ QUIZ STATE ============
 let currentQuestion = 0;
 let selectedAnswer = null;
 let totalCO2 = 0;
-let quizCompleted = false;
 
-// ============ DOM ELEMENTS ============
+// ============ DOM ============
 const questionEl = document.getElementById('quiz-question');
 const optionsEl = document.getElementById('quiz-options');
 const stateEl = document.getElementById('quiz-state');
@@ -86,20 +81,17 @@ const resultsEl = document.getElementById('quiz-results');
 const resultsValue = document.getElementById('results-value');
 const restartBtn = document.getElementById('quiz-restart-btn');
 const postQuizScroll = document.getElementById('post-quiz-scroll');
-const quizBox = document.getElementById('quiz-box');
+const quizCard = document.querySelector('.quiz-card');
 
-// ============ INITIALIZE QUIZ ============
+// ============ QUIZ FUNCTIONS ============
 function initQuiz() {
-    // Populate state dropdown
     usStates.forEach(state => {
-        const option = document.createElement('option');
-        option.value = state;
-        option.textContent = state;
-        stateSelect.appendChild(option);
+        const opt = document.createElement('option');
+        opt.value = state;
+        opt.textContent = state;
+        stateSelect.appendChild(opt);
     });
-    
     renderQuestion();
-    
     nextBtn.addEventListener('click', handleNext);
     restartBtn.addEventListener('click', restartQuiz);
 }
@@ -109,36 +101,31 @@ function renderQuestion() {
     questionEl.textContent = q.question;
     optionsEl.innerHTML = '';
     selectedAnswer = null;
-    
+
     if (q.type === 'dropdown') {
         optionsEl.style.display = 'none';
         stateEl.style.display = 'block';
     } else {
         optionsEl.style.display = 'flex';
         stateEl.style.display = 'none';
-        
         q.options.forEach((opt, i) => {
             const btn = document.createElement('button');
-            btn.className = 'quiz-option';
+            btn.className = 'option-btn';
             btn.textContent = opt;
-            btn.addEventListener('click', () => selectOption(btn, i));
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                selectedAnswer = i;
+            });
             optionsEl.appendChild(btn);
         });
     }
 }
 
-function selectOption(btn, index) {
-    document.querySelectorAll('.quiz-option').forEach(b => b.classList.remove('selected'));
-    btn.classList.add('selected');
-    selectedAnswer = index;
-}
-
 function handleNext() {
     const q = quizQuestions[currentQuestion];
-    
     if (q.type === 'dropdown') {
-        // State question - add base CO2 (average ~14 tons for US)
-        totalCO2 += 5; // Base home energy (varies by state grid)
+        totalCO2 += 5;
     } else {
         if (selectedAnswer === null) {
             alert('Please select an option!');
@@ -146,9 +133,7 @@ function handleNext() {
         }
         totalCO2 += q.values[selectedAnswer];
     }
-    
     currentQuestion++;
-    
     if (currentQuestion >= quizQuestions.length) {
         showResults();
     } else {
@@ -157,13 +142,10 @@ function handleNext() {
 }
 
 function showResults() {
-    quizBox.style.display = 'none';
+    quizCard.style.display = 'none';
     resultsEl.style.display = 'block';
     resultsValue.textContent = totalCO2.toFixed(1) + ' metric tons/year';
     postQuizScroll.style.display = 'block';
-    quizCompleted = true;
-    
-    // Draw the celebrity chart now that quiz is complete
     drawCelebrityChart();
 }
 
@@ -171,71 +153,61 @@ function restartQuiz() {
     currentQuestion = 0;
     selectedAnswer = null;
     totalCO2 = 0;
-    quizCompleted = false;
-    
-    quizBox.style.display = 'block';
+    quizCard.style.display = 'block';
     resultsEl.style.display = 'none';
     postQuizScroll.style.display = 'none';
     optionsEl.style.display = 'flex';
     stateEl.style.display = 'none';
-    
     renderQuestion();
 }
 
-// ============ CELEBRITY BAR CHART ============
+// ============ BAR CHART ============
 function drawCelebrityChart() {
     const container = d3.select('#celebrity-chart');
     container.selectAll('*').remove();
-    
+
     const data = Object.entries(celebrityData).map(([name, info]) => ({
         name,
         co2: info.co2,
         color: info.color
     }));
-    
-    const margin = { top: 40, right: 30, bottom: 100, left: 80 };
-    const width = Math.min(800, window.innerWidth - 60) - margin.left - margin.right;
-    const height = 400 - margin.top - margin.bottom;
-    
+
+    const margin = { top: 30, right: 20, bottom: 80, left: 60 };
+    const width = Math.min(650, window.innerWidth - 40) - margin.left - margin.right;
+    const height = 350 - margin.top - margin.bottom;
+
     const svg = container.append('svg')
         .attr('width', width + margin.left + margin.right)
         .attr('height', height + margin.top + margin.bottom)
         .append('g')
         .attr('transform', `translate(${margin.left},${margin.top})`);
-    
+
     const x = d3.scaleBand()
         .domain(data.map(d => d.name))
         .range([0, width])
-        .padding(0.3);
-    
+        .padding(0.35);
+
     const y = d3.scaleLinear()
         .domain([0, d3.max(data, d => d.co2)])
         .nice()
         .range([height, 0]);
-    
+
     // X axis
     svg.append('g')
         .attr('transform', `translate(0,${height})`)
         .call(d3.axisBottom(x))
         .selectAll('text')
-        .attr('transform', 'rotate(-45)')
+        .attr('transform', 'rotate(-40)')
         .style('text-anchor', 'end')
-        .style('font-size', '12px');
-    
+        .style('font-size', '11px');
+
     // Y axis
     svg.append('g')
-        .call(d3.axisLeft(y).tickFormat(d => d.toLocaleString()));
-    
-    // Y axis label
-    svg.append('text')
-        .attr('transform', 'rotate(-90)')
-        .attr('y', -60)
-        .attr('x', -height / 2)
-        .attr('text-anchor', 'middle')
-        .style('font-size', '12px')
-        .text('CO₂ Emissions (metric tons)');
-    
-    // Bars with scroll animation
+        .call(d3.axisLeft(y).ticks(5).tickFormat(d => d.toLocaleString()))
+        .selectAll('text')
+        .style('font-size', '10px');
+
+    // Bars with animation on scroll
     const bars = svg.selectAll('.bar')
         .data(data)
         .enter()
@@ -245,26 +217,25 @@ function drawCelebrityChart() {
         .attr('width', x.bandwidth())
         .attr('y', height)
         .attr('height', 0)
-        .attr('fill', d => d.color);
-    
-    // Animate bars on scroll
-    const chartSection = document.getElementById('chart-section');
+        .attr('fill', d => d.color)
+        .attr('rx', 3);
+
+    // Animate on scroll
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 bars.transition()
-                    .duration(1000)
-                    .delay((d, i) => i * 150)
+                    .duration(800)
+                    .delay((d, i) => i * 100)
                     .attr('y', d => y(d.co2))
                     .attr('height', d => height - y(d.co2));
             }
         });
-    }, { threshold: 0.5 });
-    
-    observer.observe(chartSection);
+    }, { threshold: 0.4 });
+    observer.observe(document.getElementById('chart-section'));
 }
 
-// ============ CELEBRITY COMPARISON SLIDERS ============
+// ============ COMPARISON SLIDERS ============
 const celebSelect = document.getElementById('celebrity-select');
 const celebImage = document.getElementById('celebrity-image');
 const celebBar = document.getElementById('single-celebrity-bar');
@@ -295,62 +266,44 @@ function updateCelebrity() {
     const selected = celebSelect.value;
     const celeb = celebrityData[selected];
     
-    // Update image
     celebImage.src = `0_images/celebrities/${celeb.image}`;
     celebImage.alt = selected;
     
-    // Update bar (max is Trump at ~32000)
     const maxCO2 = 35000;
-    const barWidth = (celeb.co2 / maxCO2) * 100;
-    celebBar.style.width = barWidth + '%';
-    celebBar.style.background = celeb.color;
+    celebBar.style.width = (celeb.co2 / maxCO2 * 100) + '%';
     celebValue.textContent = celeb.co2.toLocaleString() + ' metric tons';
     
-    // Update final message celebrity name
     finalCelebrity.textContent = selected + "'s";
-    
     updateYourCO2();
 }
 
 function updateYourCO2() {
-    const burgers = parseInt(sliderBurgers.value);
-    const water = parseInt(sliderWater.value);
-    const nuggets = parseInt(sliderNuggets.value);
-    const cigarettes = parseInt(sliderCigarettes.value);
-    const uranium = parseFloat(sliderUranium.value);
-    
-    // Update display values
-    valBurgers.textContent = burgers.toLocaleString();
-    valWater.textContent = water.toLocaleString();
-    valNuggets.textContent = nuggets.toLocaleString();
-    valCigarettes.textContent = cigarettes.toLocaleString();
-    valUranium.textContent = uranium.toFixed(1);
-    
-    // Calculate total CO2 (convert kg to metric tons)
-    const totalKg = 
-        burgers * co2PerItem.burgers +
-        water * co2PerItem.water +
-        nuggets * co2PerItem.nuggets +
-        cigarettes * co2PerItem.cigarettes +
-        uranium * co2PerItem.uranium;
-    
+    const b = parseInt(sliderBurgers.value);
+    const w = parseInt(sliderWater.value);
+    const n = parseInt(sliderNuggets.value);
+    const c = parseInt(sliderCigarettes.value);
+    const u = parseFloat(sliderUranium.value);
+
+    valBurgers.textContent = b.toLocaleString();
+    valWater.textContent = w.toLocaleString();
+    valNuggets.textContent = n.toLocaleString();
+    valCigarettes.textContent = c.toLocaleString();
+    valUranium.textContent = u.toFixed(1);
+
+    const totalKg = b * co2PerItem.burgers + w * co2PerItem.water + n * co2PerItem.nuggets + c * co2PerItem.cigarettes + u * co2PerItem.uranium;
     const totalTons = totalKg / 1000;
-    
-    // Update bar
+
     const maxCO2 = 35000;
-    const barWidth = Math.min((totalTons / maxCO2) * 100, 100);
-    yourBar.style.width = barWidth + '%';
-    yourValue.textContent = totalTons.toLocaleString(undefined, {maximumFractionDigits: 0}) + ' metric tons';
-    
-    // Update final message
-    finalBurgers.textContent = burgers.toLocaleString();
-    finalWater.textContent = water.toLocaleString();
-    finalNuggets.textContent = nuggets.toLocaleString();
-    finalCigarettes.textContent = cigarettes.toLocaleString();
-    finalUranium.textContent = uranium.toFixed(1);
+    yourBar.style.width = Math.min((totalTons / maxCO2 * 100), 100) + '%';
+    yourValue.textContent = Math.round(totalTons).toLocaleString() + ' metric tons';
+
+    finalBurgers.textContent = b.toLocaleString();
+    finalWater.textContent = w.toLocaleString();
+    finalNuggets.textContent = n.toLocaleString();
+    finalCigarettes.textContent = c.toLocaleString();
+    finalUranium.textContent = u.toFixed(1);
 }
 
-// Event listeners for sliders
 celebSelect.addEventListener('change', updateCelebrity);
 sliderBurgers.addEventListener('input', updateYourCO2);
 sliderWater.addEventListener('input', updateYourCO2);
@@ -358,7 +311,7 @@ sliderNuggets.addEventListener('input', updateYourCO2);
 sliderCigarettes.addEventListener('input', updateYourCO2);
 sliderUranium.addEventListener('input', updateYourCO2);
 
-// ============ INITIALIZE ============
+// ============ INIT ============
 document.addEventListener('DOMContentLoaded', () => {
     initQuiz();
     updateCelebrity();

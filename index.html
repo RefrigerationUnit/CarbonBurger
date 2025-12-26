@@ -2,193 +2,169 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carbon Footprint Quiz</title>
     <link rel="stylesheet" href="styles.css">
     <script src="d3.js"></script>
 </head>
 <body>
+    <!-- Header -->
     <header>
-        <div class="buttons-container">
-            <button class="btn0" onclick="location.href='about/index.html'">ABOUT</button>
-            <button class="btn0" onclick="location.href='index.html'">HOME</button>
-            <button class="btn0" onclick="location.href='references/index.html'">CONTACT</button>
-        </div>
+        <nav class="nav-container">
+            <button class="nav-btn" onclick="location.href='about/index.html'">ABOUT</button>
+            <button class="nav-btn" onclick="location.href='index.html'">HOME</button>
+            <button class="nav-btn" onclick="location.href='references/index.html'">CONTACT</button>
+        </nav>
     </header>
 
-    <!-- Side Images (slightly transparent) -->
-    <div class="image-gallery-left">
-        <img src="0_images/Friends.png" alt="Friends" class="side-image">
-        <img src="0_images/Kid.png" alt="Kid" class="side-image">
-        <img src="0_images/Shopping.png" alt="Shopping" class="side-image">
-    </div>
-    <div class="image-gallery-right">
-        <img src="0_images/Bicycles.png" alt="Bicycles" class="side-image">
-        <img src="0_images/Cars.png" alt="Cars" class="side-image">
-        <img src="0_images/Bus.png" alt="Bus" class="side-image">
-    </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-side-left">
+            <img src="0_images/Friends.png" alt="" class="floating-img">
+        </div>
+        <div class="hero-content">
+            <h1>Not Your Average Carbon<br>Footprint Quiz</h1>
+            <p class="strikethrough">Exposing Carbon Footprint Propaganda</p>
+            <div class="scroll-hint bounce">↓ Scroll to begin ↓</div>
+        </div>
+    </section>
 
-    <div id="container">
-        <!-- SECTION 1: Hero -->
-        <section class="section hero-section">
-            <h1 class="main-title">Not Your Average Carbon Footprint Quiz</h1>
-            <p class="subtitle">Exposing Carbon Footprint Propaganda</p>
-            <div class="scroll-indicator bounce">
-                <p>↓ Scroll to begin ↓</p>
-            </div>
-        </section>
+    <!-- Intro Section -->
+    <section class="intro">
+        <div class="intro-side-left">
+            <img src="0_images/apartment_plants.png" alt="" class="floating-img small">
+        </div>
+        <div class="intro-side-right">
+            <img src="0_images/match.png" alt="" class="floating-img small">
+        </div>
+        <div class="intro-box">
+            <p>Private jets have become one of the clearest symbols of modern inequality: a tiny elite soaring above the world while the rest of us absorb the costs. Each hour of private flight emits more carbon than many people produce in an entire year. Yet these flights are increasing, often subsidized through loopholes and tax breaks, turning luxury travel into collective burden.</p>
+        </div>
+        <div class="scroll-hint bounce">↓ Continue to quiz ↓</div>
+    </section>
 
-        <!-- SECTION 2: Intro with trees -->
-        <section class="section intro-section">
-            <div class="intro-image">
-                <img src="0_images/apartment_plants.png" alt="Trees" class="trees-img">
+    <!-- Quiz Section -->
+    <section class="quiz-section">
+        <h2>Calculate your Carbon Footprint</h2>
+        <p class="quiz-note">You must complete this quiz to see the rest of the content!</p>
+        
+        <div class="quiz-card">
+            <p class="question" id="quiz-question">HOW OFTEN DO YOU EAT RED MEAT?</p>
+            <div class="options" id="quiz-options"></div>
+            <div id="quiz-state" style="display:none;">
+                <select id="state-select"></select>
             </div>
-            <div class="intro-text">
-                <p>Private jets have become one of the clearest symbols of modern inequality: 
-                a tiny elite soaring above the world while the rest of us absorb the costs. 
-                Each hour of private flight emits more carbon than many people produce in an 
-                entire year. Yet these flights are increasing, often subsidized through 
-                loopholes and tax breaks, turning luxury travel into collective burden.</p>
-            </div>
-            <div class="scroll-indicator bounce">
-                <p>↓ Continue to quiz ↓</p>
-            </div>
-        </section>
+            <button class="next-btn" id="quiz-next-btn">NEXT</button>
+        </div>
 
-        <!-- SECTION 3: Quiz -->
-        <section class="section quiz-section">
-            <div class="quiz-header">
-                <h2>Calculate your Carbon Footprint</h2>
-                <p class="quiz-subtitle">You must complete this quiz to see the rest of the content!</p>
-            </div>
-            
-            <div class="quiz-box" id="quiz-box">
-                <p class="quiz-question-label" id="quiz-question">HOW OFTEN DO YOU EAT RED MEAT?</p>
-                <div id="quiz-options" class="quiz-options">
-                    <!-- Options injected by JS -->
+        <div id="quiz-results" class="results-card" style="display:none;">
+            <h3>Your Estimated CO₂ Emissions</h3>
+            <p class="result-number" id="results-value">0 metric tons/year</p>
+            <button class="next-btn" id="quiz-restart-btn">Restart Quiz</button>
+        </div>
+
+        <div class="scroll-hint bounce" id="post-quiz-scroll" style="display:none;">↓ Scroll ↓</div>
+    </section>
+
+    <!-- Bar Chart Section -->
+    <section class="chart-section" id="chart-section">
+        <div class="chart-side-left">
+            <img src="0_images/Bicycles.png" alt="" class="floating-img">
+        </div>
+        <div class="chart-side-right">
+            <img src="0_images/Cars.png" alt="" class="floating-img">
+        </div>
+        <div id="celebrity-chart"></div>
+        <div class="scroll-hint bounce">↓ Scroll ↓</div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section class="comparison-section">
+        <div class="comparison-wrapper">
+            <!-- Left: Celebrity Selection -->
+            <div class="celeb-picker">
+                <label>Choose a celebrity:</label>
+                <select id="celebrity-select">
+                    <option value="Jay Z">★ Jay-Z</option>
+                    <option value="Luke Bryan">Luke Bryan</option>
+                    <option value="Taylor Swift">Taylor Swift</option>
+                    <option value="Donald Trump">Donald Trump</option>
+                    <option value="Kim Kardashian">Kim Kardashian</option>
+                    <option value="P.Diddy">P. Diddy</option>
+                </select>
+                <div class="celeb-photo">
+                    <img id="celebrity-image" src="0_images/celebrities/JayZ.jpg" alt="Celebrity">
                 </div>
-                <div id="quiz-state" class="quiz-state" style="display:none;">
-                    <select id="state-select"></select>
-                </div>
-                <button class="btn-quiz" id="quiz-next-btn">NEXT</button>
-            </div>
-
-            <div id="quiz-results" class="quiz-results" style="display:none;">
-                <h3>Your Estimated CO₂ Emissions</h3>
-                <p id="results-value">0 metric tons/year</p>
-                <button class="btn-quiz" id="quiz-restart-btn">Restart Quiz</button>
-            </div>
-
-            <div class="scroll-indicator bounce" id="post-quiz-scroll" style="display:none;">
-                <p>↓ Scroll ↓</p>
-            </div>
-        </section>
-
-        <!-- SECTION 4: Celebrity Bar Chart -->
-        <section class="section chart-section" id="chart-section">
-            <div class="chart-container">
-                <div id="celebrity-chart"></div>
-            </div>
-            <div class="scroll-indicator bounce">
-                <p>↓ Scroll ↓</p>
-            </div>
-        </section>
-
-        <!-- SECTION 5: Celebrity Comparison with Sliders -->
-        <section class="section comparison-section">
-            <div class="comparison-container">
-                <div class="comparison-left">
-                    <label for="celebrity-select">Choose a celebrity:</label>
-                    <select id="celebrity-select" class="celebrity-dropdown">
-                        <option value="Jay Z">Jay-Z</option>
-                        <option value="Luke Bryan">Luke Bryan</option>
-                        <option value="Taylor Swift">Taylor Swift</option>
-                        <option value="Donald Trump">Donald Trump</option>
-                        <option value="Kim Kardashian">Kim Kardashian</option>
-                        <option value="P.Diddy">P. Diddy</option>
-                    </select>
-                    <div class="celebrity-image-wrapper">
-                        <img id="celebrity-image" src="0_images/celebrities/JayZ.jpg" alt="Celebrity">
+                <div class="celeb-bar-area">
+                    <p>Their CO2 emissions:</p>
+                    <div class="bar-track">
+                        <div id="single-celebrity-bar" class="bar-fill purple"></div>
                     </div>
-                    <div class="celebrity-bar-wrapper">
-                        <p>Their CO2 emissions:</p>
-                        <div class="single-bar-container">
-                            <div id="single-celebrity-bar" class="single-bar"></div>
-                        </div>
-                        <p id="celebrity-co2-value">4,594 metric tons</p>
-                    </div>
-                </div>
-
-                <div class="comparison-right">
-                    <h3>Match between celebrity's CO2 production below:</h3>
-                    
-                    <div class="slider-group">
-                        <label>Burgers</label>
-                        <input type="range" id="slider-burgers" min="0" max="50000" value="0">
-                        <span id="val-burgers">0</span>
-                    </div>
-                    
-                    <div class="slider-group">
-                        <label>Glasses of water</label>
-                        <input type="range" id="slider-water" min="0" max="500000" value="0">
-                        <span id="val-water">0</span>
-                    </div>
-                    
-                    <div class="slider-group">
-                        <label>Chicken nuggets</label>
-                        <input type="range" id="slider-nuggets" min="0" max="100000" value="0">
-                        <span id="val-nuggets">0</span>
-                    </div>
-                    
-                    <div class="slider-group">
-                        <label>Cigarettes</label>
-                        <input type="range" id="slider-cigarettes" min="0" max="500000" value="0">
-                        <span id="val-cigarettes">0</span>
-                    </div>
-                    
-                    <div class="slider-group">
-                        <label>lbs of Uranium-235</label>
-                        <input type="range" id="slider-uranium" min="0" max="100" value="0" step="0.1">
-                        <span id="val-uranium">0</span>
-                    </div>
-
-                    <div class="your-co2-bar">
-                        <p>Your CO2 production:</p>
-                        <div class="single-bar-container">
-                            <div id="your-co2-bar" class="single-bar your-bar"></div>
-                        </div>
-                        <p id="your-co2-value">0 metric tons</p>
-                    </div>
+                    <p id="celebrity-co2-value">4,594 metric tons</p>
                 </div>
             </div>
 
-            <div class="scroll-indicator bounce">
-                <p>↓ Scroll ↓</p>
-            </div>
-        </section>
+            <!-- Right: Sliders -->
+            <div class="slider-panel">
+                <h3>Match between celebrity's<br>CO2 production below:</h3>
+                
+                <div class="slider-row">
+                    <span class="slider-label">Burgers</span>
+                    <input type="range" id="slider-burgers" min="0" max="50000" value="0">
+                    <span class="slider-val" id="val-burgers">0</span>
+                </div>
+                <div class="slider-row">
+                    <span class="slider-label">Glasses of water</span>
+                    <input type="range" id="slider-water" min="0" max="500000" value="0">
+                    <span class="slider-val" id="val-water">0</span>
+                </div>
+                <div class="slider-row">
+                    <span class="slider-label">Chicken nuggets</span>
+                    <input type="range" id="slider-nuggets" min="0" max="100000" value="0">
+                    <span class="slider-val" id="val-nuggets">0</span>
+                </div>
+                <div class="slider-row">
+                    <span class="slider-label">Cigarettes</span>
+                    <input type="range" id="slider-cigarettes" min="0" max="500000" value="0">
+                    <span class="slider-val" id="val-cigarettes">0</span>
+                </div>
+                <div class="slider-row">
+                    <span class="slider-label">lbs of Uranium-235</span>
+                    <input type="range" id="slider-uranium" min="0" max="100" value="0" step="0.1">
+                    <span class="slider-val" id="val-uranium">0</span>
+                </div>
 
-        <!-- SECTION 6: Final Message -->
-        <section class="section final-section">
-            <div class="final-message">
-                <p id="final-text">
-                    To match <strong id="final-celebrity">Jay-Z's</strong> CO2 production through their jet usage, 
-                    you would need to consume <strong id="final-burgers">0</strong> burgers, 
-                    <strong id="final-water">0</strong> glasses of water, 
-                    <strong id="final-nuggets">0</strong> chicken nuggets, 
-                    <strong id="final-cigarettes">0</strong> cigarettes, 
-                    <strong id="final-uranium">0</strong> pounds of Uranium-235.
-                </p>
+                <div class="your-bar-area">
+                    <p>Your CO2 production:</p>
+                    <div class="bar-track">
+                        <div id="your-co2-bar" class="bar-fill green"></div>
+                    </div>
+                    <p id="your-co2-value">0 metric tons</p>
+                </div>
             </div>
-            <div class="world-image">
-                <img src="0_images/World.png" alt="World" class="world">
-            </div>
-        </section>
 
-        <!-- Footer -->
-        <footer class="site-footer">
-            <p>• This website was created by Julio, Ayomikun, and Elizabeth for our Data Visualization class at Columbia University!</p>
-        </footer>
-    </div>
+            <!-- Moon decoration -->
+            <div class="moon-deco">
+                <img src="0_images/earth.png" alt="" class="floating-img">
+            </div>
+        </div>
+        <div class="scroll-hint bounce">↓ Scroll ↓</div>
+    </section>
+
+    <!-- Final Section -->
+    <section class="final-section">
+        <div class="final-box">
+            <p>To match <strong id="final-celebrity">Jay-Z's</strong> CO2 production through their jet usage, you would need to consume <strong id="final-burgers">0</strong> burgers, <strong id="final-water">0</strong> glasses of water, <strong id="final-nuggets">0</strong> chicken nuggets, <strong id="final-cigarettes">0</strong> cigarettes, <strong id="final-uranium">0</strong> pounds of Uranium-235.</p>
+        </div>
+        <div class="world-deco">
+            <img src="0_images/World.png" alt="World">
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>•This website was created by Julio, Ayomikun, and Elizabeth for our Data Visualization class at Columbia University!</p>
+    </footer>
 
     <script src="main.js"></script>
 </body>
